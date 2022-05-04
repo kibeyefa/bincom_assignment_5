@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://dl.dropboxusercontent.com/s/o093y16u4d3kojv/code.png?dl=0"
+        />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'feed/css/bootstrap.css' %}" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://dl.dropboxusercontent.com/s/ecyb1drs5j1jyjf/styles.css?dl=0"
+        />
+        <style>
+            img {
+                object-fit: cover !important;
+                max-height: 400px;
+            }
+        </style>
+        {% block cssfiles %}{% endblock cssfiles %}
+        <title>ByteWalk</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><b>ByteWalk</b></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto align-items-lg-center">
+                        <a class="nav-item nav-link" href="{% url 'home' %}"
+                            >Home</a
+                        >
+                        <a
+                            class="nav-item nav-link"
+                            href="{% url 'users_list' %}"
+                            >Add New Friends</a
+                        >
+                        {% if user.is_authenticated %}
+                        <a
+                            class="nav-item nav-link"
+                            href="{% url 'friend_list' %}"
+                            >Friends</a
+                        >
+                        <a
+                            class="nav-item nav-link"
+                            href="{% url 'my_profile' %}"
+                            >Profile</a
+                        >
+                        <a
+                            class="nav-item nav-link"
+                            href="{% url 'post-create' %}"
+                            >Create Post</a
+                        >
+                        <a
+                            class="nav-item btn btn-danger text-light me-1"
+                            href="{% url 'logout' %}"
+                            >Logout</a
+                        >
+                        {% else %}
+                        <div class="d-flex align-items-center">
+                            <a
+                                class="btn btn-success text-light"
+                                href="{% url 'login' %}"
+                                >Login</a
+                            >
+                            <a
+                                class="btn btn-info text-light ms-2"
+                                href="{% url 'register' %} "
+                                >Register</a
+                            >
+                        </div>
+                        {% endif %} <br />
+
+                        {% block searchform %}
+                        <br />
+                        {% endblock searchform %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-lg mt-3">
+            {% block content %}{% endblock content %}
+        </div>
+
+        <!-- <footer class="page-footer font-small black bg-dark text-white mt-3">
+            <div class="footer-copyright text-center py-3">
+                ByteWalk © 2020 <br /><small class="text-muted"
+                    >All rights reserved!</small
+                >
+            </div>
+        </footer> -->
+
+        <!-- JS Files -->
+        <script src="{% static 'feed/js/jquery.min.js'%}"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
+        <script src="{% static 'feed/js/bootstrap.js' %}"></script>
+        <script>
+            document.querySelectorAll('br').forEach((br) => {
+                br.style.display = 'none';
+            });
+            document.querySelectorAll('.form-inline').forEach((item) => {
+                item.className = 'd-flex align-items-center my-2 my-lg-0';
+                console.log(item);
+            });
+            document.querySelector('.d-flex input').className =
+                'form-control me-2';
+        </script>
+
+        {% block jsfiles %}{% endblock jsfiles %}
+    </body>
+</html>

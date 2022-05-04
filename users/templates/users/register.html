@@ -1,0 +1,96 @@
+{% extends "feed/layout.html" %} {% load crispy_forms_tags %} {% load static %}
+{% block cssfiles %}
+<style>
+    ul,
+    li {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+{% endblock cssfiles %} {% block content %}
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><b>Register</b></h5>
+                    <form class="form-signin" method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <br />
+                            {% for field in form %} <br />
+                            <div class="form-group mb-2">
+                                <label class="form-label">
+                                    {{field.label}}:
+                                </label>
+                                {{field}} {% if field.errors %}
+                                <div
+                                    class="alert alert-warning alert-dismissible fade show text-start my-1"
+                                    role="alert"
+                                >
+                                    {{field.errors}}
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <br />
+                            {% endfor%} <br />
+                            {% for error in form.errors %} {% endfor %}
+                        </fieldset>
+                        <div class="form-group">
+                            <button
+                                class="btn btn-primary btn-block text-uppercase"
+                                type="submit"
+                            >
+                                Sign Up</button
+                            ><br /><br />
+                        </div>
+                        <small
+                            ><p class="text-center">
+                                Already Registered!
+                                <a href="{% url 'login' %}"
+                                    ><b>Login Now!</b></a
+                                >
+                            </p></small
+                        >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<br />
+{% block jsfiles %}
+<script>
+    let username = document.querySelectorAll('input[type="text"]');
+    let email = document.querySelectorAll('input[type="email"]');
+    let password_fields = document.querySelectorAll('input[type="password"]');
+    console.log(username);
+    console.log(email);
+    console.log(password_fields);
+    password_fields.forEach((field) => {
+        field.classList.add('form-control');
+    });
+    email.forEach((field) => {
+        field.classList.add('form-control');
+    });
+    username.forEach((field) => {
+        field.classList.add('form-control');
+    });
+
+    document.querySelectorAll('li').forEach((li) => {
+        li.style.listStyleType = 'none';
+    });
+    document.querySelectorAll('br').forEach((br) => {
+        br.style.display = 'none';
+    });
+</script>
+{% endblock %}
