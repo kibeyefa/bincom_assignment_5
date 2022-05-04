@@ -1,4 +1,4 @@
-{% extends "feed/layout.html" %} {% load static %} {% load crispy_forms_tags %}
+{% extends "feed/layout.html" %} {% load static %} 
 {% block searchform %}
 <form
     class="form-inline my-2 my-lg-0 ml-5"
@@ -32,12 +32,13 @@
                             {% endfor %}
                         </fieldset>
                         <div class="form-group mt-2">
-                            <button
-                                class="btn btn-lg btn-primary btn-block text-uppercase"
+                            <input
+                                class="btn rounded-1 px-4 py-2 btn-primary text-uppercase"
                                 type="submit"
+                                value="post"
                             >
-                                Post</button
-                            ><br />
+                                
+                            <br />
                         </div>
                     </form>
                 </div>
@@ -51,7 +52,7 @@
 
 {% block jsfiles %}
 <script>
-    document.querySelectorAll('input').forEach((input) => {
+    document.querySelectorAll('input:not([type="submit"])').forEach((input) => {
         input.className = 'form-control';
     });
 </script>
